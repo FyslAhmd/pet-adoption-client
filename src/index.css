@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+@plugin "daisyui";
+@import "react-toastify/dist/ReactToastify.css";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #b1b8df;
+  --color-secondary: #b3bcf0;
+  --color-accent: #9896df;
+  --color-error: #dfdefc;
+}
+body {
+  background-color: rgb(222, 220, 220);
+  font-family: "Roboto", sans-serif;
+}
+a.active {
+  @apply rounded-full bg-primary;
+}
