@@ -58,7 +58,7 @@ const Register = () => {
         created_at: new Date().toISOString(),
       };
       console.log(userInfo);
-      //   await axiosIns.post("/users", userInfo);
+        await axiosIns.post("/users", userInfo);
       await updateUserProfile({
         displayName: data.name,
         photoURL: profilePic,

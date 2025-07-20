@@ -27,9 +27,9 @@ const Login = () => {
       .then(async (res) => {
         console.log(res.user);
         toast.success("Login Successfull");
-        // await axiosIns.patch("/users/last-login", {
-        //   email: data.email,
-        // });
+        await axiosIns.patch("/users/last-login", {
+          email: data.email,
+        });
         navigate(location.state ? location.state : "/");
       })
       .catch((err) => {
