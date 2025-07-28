@@ -1,16 +1,32 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
+import useAuth from "../../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { user, logOutUser } = useAuth();
+  const handleLogOut = () => {
+    logOutUser()
+      .then((res) => {
+        toast.error("Logged out from application");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const navItems = (
     <>
       <NavLink className="text-base font-medium px-3 py-2" to="/">
         Home
       </NavLink>
-      <NavLink className="text-base font-medium px-3 py-2" to="/dashboard">
-        Dashboard
-      </NavLink>
+      {user && (
+        <>
+          <NavLink className="text-base font-medium px-3 py-2" to="/dashboard">
+            Dashboard
+          </NavLink>
+        </>
+      )}
       <NavLink className="text-base font-medium px-3 py-2" to="/availableCoins">
         About Us
       </NavLink>
@@ -56,12 +72,30 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn rounded-full bg-transparent" to="/login">
-          Sign In
-        </Link>
-        <Link className="btn bg-primary rounded-full ml-2" to="/register">
-          Sign Up
-        </Link>
+        {user ? (
+          <div className="flex items-center">
+            <img
+              src={user?.photoURL}
+              alt=""
+              className="w-12 h-12 rounded-full bg-white"
+            />
+            <button
+              className="btn bg-primary rounded-full ml-2"
+              onClick={handleLogOut}
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <>
+            <Link className="btn rounded-full bg-transparent" to="/login">
+              Sign In
+            </Link>
+            <Link className="btn bg-primary rounded-full ml-2" to="/register">
+              Sign Up
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
