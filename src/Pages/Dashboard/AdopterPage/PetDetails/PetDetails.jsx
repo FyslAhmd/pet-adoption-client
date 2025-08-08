@@ -5,6 +5,16 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingPage from "../../../Shared/Loading/LoadingPage";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 
 const PetDetails = () => {
   const { id } = useParams();
@@ -43,6 +53,10 @@ const PetDetails = () => {
 
   if (!pet || isLoading) return <LoadingPage />;
 
+  // Extract coordinates from data
+  const lat = pet?.coordinates?.lat || 0;
+  const lng = pet?.coordinates?.lng || 0;
+
   return (
     <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-center text-black">
@@ -50,13 +64,44 @@ const PetDetails = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-6">
-        {/* Pet Image */}
+        {/* Pet Image + Map */}
         <div>
           <img
             src={pet.image}
             alt={pet.species}
             className="w-full h-[350px] object-cover rounded-lg"
           />
+
+          {/* Map Section */}
+          {lat && lng ? (
+            <div className="mt-4 rounded-lg overflow-hidden border border-gray-300">
+              <MapContainer
+                center={[lat, lng]}
+                zoom={15}
+                style={{ height: "300px", width: "100%" }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[lat, lng]}>
+                  <Popup>
+                    <div>
+                      <strong>
+                        {pet.species} - {pet.breed}
+                      </strong>
+                      <br />
+                      Location: {pet.location}
+                      <br />
+                      Age: {pet.age} years
+                    </div>
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
+          ) : (
+            <p className="mt-4 text-red-500">No coordinates available</p>
+          )}
         </div>
 
         {/* Pet Info */}
