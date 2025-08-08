@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @import "react-toastify/dist/ReactToastify.css";
+@import 'leaflet/dist/leaflet.css';
+
 
 @plugin "daisyui/theme" {
   name: "light";
