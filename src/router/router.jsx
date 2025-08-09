@@ -11,6 +11,16 @@ import AddNewPet from "../Pages/Dashboard/RescuerPages/AddNewPet/AddNewPet";
 import MyPets from "../Pages/Dashboard/RescuerPages/MyPets/MyPets";
 import BrowsePets from "../Pages/Dashboard/AdopterPage/BrowsePets/BrowsePets";
 import PetDetails from "../Pages/Dashboard/AdopterPage/PetDetails/PetDetails";
+import MyAdoptions from "../Pages/Dashboard/AdopterPage/MySubmission/MySubmission";
+import FavouritePets from "../Pages/Dashboard/AdopterPage/FavouritePets/FavouritePets";
+import Error404 from "../Pages/Shared/Error404/Error404";
+import ManageUsers from "../Pages/Dashboard/AdminPage/ManageUsers/ManageUsers";
+import ManagePets from "../Pages/Dashboard/AdminPage/ManagePets/ManagePets";
+import PrivateRoute from "../Routes/PrivateRoute";
+import Forbidden from "../Pages/Shared/Forbidden/Forbidden";
+import AdminRoute from "../Routes/AdminRoute";
+import AdopterRoute from "../Routes/AdopterRoute";
+import RescuerRoute from "../Routes/RescuerRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         Component: About,
+      },
+      {
+        path: "/forbidden",
+        Component: Forbidden,
       },
     ],
   },
@@ -43,7 +57,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboardlayout />,
+    element: (
+      <PrivateRoute>
+        <Dashboardlayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -51,21 +69,73 @@ const router = createBrowserRouter([
       },
       {
         path: "addNewPet",
-        element: <AddNewPet />,
+        element: (
+          <RescuerRoute>
+            <AddNewPet />
+          </RescuerRoute>
+        ),
       },
       {
         path: "myPets",
-        element: <MyPets />,
+        element: (
+          <RescuerRoute>
+            <MyPets />
+          </RescuerRoute>
+        ),
       },
       {
         path: "browsePet",
-        element: <BrowsePets />,
+        element: (
+          <AdopterRoute>
+            <BrowsePets />
+          </AdopterRoute>
+        ),
       },
       {
         path: "pets/:id",
-        element: <PetDetails />,
+        element: (
+          <AdopterRoute>
+            <PetDetails />
+          </AdopterRoute>
+        ),
+      },
+      {
+        path: "mySubmissions",
+        element: (
+          <AdopterRoute>
+            <MyAdoptions />
+          </AdopterRoute>
+        ),
+      },
+      {
+        path: "favouritePets",
+        element: (
+          <AdopterRoute>
+            <FavouritePets />
+          </AdopterRoute>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "managePets",
+        element: (
+          <AdminRoute>
+            <ManagePets />
+          </AdminRoute>
+        ),
       },
     ],
+  },
+  {
+    path: "*",
+    Component: Error404,
   },
 ]);
 

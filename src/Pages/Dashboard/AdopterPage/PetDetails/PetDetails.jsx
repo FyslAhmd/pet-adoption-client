@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -31,6 +31,13 @@ const PetDetails = () => {
       const res = await axiosSecure.get(`/pets/${id}`);
       return res.data;
     },
+    onSuccess: (data) => {
+      if (data?.favourites?.includes(user?.email)) {
+        setIsFavourite(true);
+      } else {
+        setIsFavourite(false);
+      }
+    },
   });
 
   const handleAdopt = async () => {
@@ -51,9 +58,21 @@ const PetDetails = () => {
     });
   };
 
+  const isFavourite = pet?.favourites?.includes(user?.email);
+  const handleToggleFavourite = async () => {
+    try {
+      const res = await axiosSecure.patch(`/pets/favourite/${pet._id}`, {
+        userEmail: user?.email,
+      });
+      Swal.fire("Success", res.data.message, "success");
+      await refetch();
+    } catch {
+      Swal.fire("Error", "Something went wrong", "error");
+    }
+  };
+
   if (!pet || isLoading) return <LoadingPage />;
 
-  // Extract coordinates from data
   const lat = pet?.coordinates?.lat || 0;
   const lng = pet?.coordinates?.lng || 0;
 
@@ -72,7 +91,6 @@ const PetDetails = () => {
             className="w-full h-[350px] object-cover rounded-lg"
           />
 
-          {/* Map Section */}
           {lat && lng ? (
             <div className="mt-4 rounded-lg overflow-hidden border border-gray-300">
               <MapContainer
@@ -156,12 +174,12 @@ const PetDetails = () => {
         </div>
       </div>
 
-      {/* Adopt Button */}
-      <div className="flex justify-center mt-8">
+      {/* Action Buttons */}
+      <div className="flex justify-center gap-4 mt-8">
         {pet.status === "available" ? (
           <button
             onClick={handleAdopt}
-            className="btn bg-primary text-xl text-black font-bold px-24 rounded-full"
+            className="btn bg-primary text-xl text-black font-bold px-8 rounded-full"
           >
             Adopt Pet
           </button>
@@ -172,6 +190,16 @@ const PetDetails = () => {
               : "Pet already adopted"}
           </p>
         )}
+
+        {/* Favourite Button */}
+        <button
+          onClick={handleToggleFavourite}
+          className={`btn text-xl font-bold px-8 rounded-full ${
+            isFavourite ? "bg-red-500 text-white" : "bg-gray-300 text-black"
+          }`}
+        >
+          {isFavourite ? "Remove Favourite" : "Add to Favourite"}
+        </button>
       </div>
     </div>
   );
