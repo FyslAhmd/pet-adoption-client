@@ -343,13 +343,12 @@ const AddNewPet = () => {
           </label>
           <input
             type="text"
-            value={
+            defaultValue={
               coordinates.lat && coordinates.lng
                 ? `${coordinates.lat}, ${coordinates.lng}`
                 : ""
             }
-            readOnly
-            className="border border-gray-400 p-2 w-full rounded-lg bg-gray-100 cursor-not-allowed"
+            className="border border-gray-400 p-2 w-full rounded-lg bg-gray-100"
             placeholder="Automatically detected coordinates"
           />
           {!coordinates.lat && !coordinates.lng && (

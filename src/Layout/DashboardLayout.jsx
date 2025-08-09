@@ -10,11 +10,9 @@ import {
   FaHome,
   FaClipboardList,
   FaRegPaperPlane,
-  FaMoneyBillWave,
   FaTasks,
   FaClipboardCheck,
-  FaCoins,
-  FaReceipt,
+  FaHeart,
   FaUsersCog,
   FaListAlt,
 } from "react-icons/fa";
@@ -112,7 +110,7 @@ const DashboardLayout = () => {
           <Logo />
           <li className="text-lg font-bold">
             <NavLink to="/dashboard" end>
-              <FaHome className="mr-2" />
+              <FaHome className="mr-2" color="blue" />
               Home
             </NavLink>
           </li>
@@ -122,20 +120,20 @@ const DashboardLayout = () => {
             <>
               <li className="text-xl font-bold">
                 <NavLink to="/dashboard/browsePet">
-                  <FaClipboardList className="mr-2" />
+                  <FaClipboardList className="mr-2" color="green" />
                   Browse Pet
                 </NavLink>
               </li>
               <li className="text-xl font-bold">
                 <NavLink to="/dashboard/mySubmissions">
-                  <FaRegPaperPlane className="mr-2" />
+                  <FaRegPaperPlane className="mr-2" color="blue" />
                   My Submissions
                 </NavLink>
               </li>
               <li className="text-xl font-bold">
-                <NavLink to="/dashboard/withdrawals">
-                  <FaMoneyBillWave className="mr-2" />
-                  Withdrawals
+                <NavLink to="/dashboard/favouritePets">
+                  <FaHeart className="mr-2" color="red" />
+                  Favourite Pets
                 </NavLink>
               </li>
             </>
@@ -146,13 +144,13 @@ const DashboardLayout = () => {
             <>
               <li className="text-xl font-bold">
                 <NavLink to="/dashboard/addNewPet">
-                  <FaTasks className="mr-2" />
+                  <FaTasks className="mr-2" color="purple"/>
                   Add new Pet
                 </NavLink>
               </li>
               <li className="text-xl font-bold">
                 <NavLink to="/dashboard/myPets">
-                  <FaClipboardCheck className="mr-2" />
+                  <FaClipboardCheck className="mr-2" color="green"/>
                   My Pets
                 </NavLink>
               </li>
@@ -160,22 +158,22 @@ const DashboardLayout = () => {
           )}
 
           {/* Admin */}
-          {/* {role === "admin" && (
+          {role === "admin" && (
             <>
               <li className="text-xl font-bold">
                 <NavLink to="/dashboard/manageUsers">
-                  <FaUsersCog className="mr-2" />
+                  <FaUsersCog className="mr-2" color="red"/>
                   Manage Users
                 </NavLink>
               </li>
               <li className="text-xl font-bold">
-                <NavLink to="/dashboard/manageTasks">
-                  <FaListAlt className="mr-2" />
-                  Manage Tasks
+                <NavLink to="/dashboard/managePets">
+                  <FaListAlt className="mr-2" color="green"/>
+                  Manage Pets
                 </NavLink>
               </li>
             </>
-          )} */}
+          )}
         </ul>
       </div>
     </div>

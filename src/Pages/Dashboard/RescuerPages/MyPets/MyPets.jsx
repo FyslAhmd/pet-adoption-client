@@ -81,7 +81,7 @@ const MyPets = () => {
                 <td>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      pet.status === "adopted"
+                      pet.status === "approved"
                         ? "bg-gray-500 text-white"
                         : "bg-green-700 text-white"
                     }`}

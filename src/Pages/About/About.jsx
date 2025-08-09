@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const About = () => {
   return (
-    <section className="relative z-10 py-16 px-8 bg-white overflow-hidden">
+    <section className="relative z-10 mb-10 py-16 px-8 bg-white overflow-hidden rounded-xl">
       <div className="absolute -top-20 -left-40 w-[400px] h-[400px] bg-gray-400 opacity-30 rounded-full blur-3xl z-0"></div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 relative z-10">
