@@ -22,7 +22,7 @@ const About = () => {
           <p className="text-gray-600 text-lg leading-relaxed text-justify">
             ResQPet is a community-driven platform that connects rescued pets
             with caring adopters and reliable rescues. Our mission is to make
-            rehoming simple, transparent, and compassionate — so every animal
+            rehoming simple, transparent, and compassionate so every animal
             can find a safe and loving forever home.
           </p>
 

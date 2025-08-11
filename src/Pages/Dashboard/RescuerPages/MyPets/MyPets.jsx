@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import dayjs from "dayjs";
 import Swal from "sweetalert2";
 import UpdatePetModal from "./UpdatePetModal";
 
@@ -12,7 +11,7 @@ const MyPets = () => {
   const [selectedPet, setSelectedPet] = useState(null);
 
   useEffect(() => {
-    document.title = "Daily Gigs | My Pets";
+    document.title = "ResQPet | My Pets";
   }, []);
 
   const { data: pets = [], refetch } = useQuery({
@@ -89,19 +88,21 @@ const MyPets = () => {
                     {pet.status}
                   </span>
                 </td>
-                <td className="space-x-2">
-                  <button
-                    onClick={() => setSelectedPet(pet)}
-                    className="btn btn-primary btn-sm text-black"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => handleDelete(pet)}
-                    className="btn bg-red-700 btn-sm text-white"
-                  >
-                    Delete
-                  </button>
+                <td>
+                  <div className="flex items-center justify-center gap-2">
+                    <button
+                      onClick={() => setSelectedPet(pet)}
+                      className="btn btn-primary btn-sm text-black"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDelete(pet)}
+                      className="btn bg-red-700 btn-sm text-white"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

@@ -106,7 +106,7 @@ const ManageUsers = () => {
                   </td>
                   <td>{user.name || "Unknown"}</td>
                   <td>{user.email}</td>
-                  <td>
+                  <td className="min-w-32">
                     <select
                       className="select select-bordered select-sm"
                       value={user.role}

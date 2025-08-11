@@ -76,12 +76,12 @@ const Review = () => {
     );
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     handleNext();
+  //   }, 6000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const cardWidth = 335;
   const offset = -currentIndex * (cardWidth + 48);
