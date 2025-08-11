@@ -7,6 +7,7 @@ import axios from "axios";
 import useAxios from "../../../Hooks/useAxios";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
+import DOMPurify from "dompurify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,14 +33,17 @@ const Register = () => {
       return;
     }
 
+    const cleanInput = (str) =>
+      DOMPurify.sanitize(str, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+    const cleanName = cleanInput(data.name);
+    const cleanEmail = cleanInput(data.email).trim();
+
     try {
       await createUser(data.email, data.password)
         .then((res) => {
-          toast.success("Registration Successfull");
-          console.log(res.user);
+          toast.success("Registration Successful");
         })
         .catch((error) => {
-          console.error(error);
           if (error.code === "auth/email-already-in-use") {
             setEmailExists(true);
             toast.error("Email already registered. Try logging in.");
@@ -50,17 +54,17 @@ const Register = () => {
         });
 
       const userInfo = {
-        name: data.name,
-        email: data.email,
+        name: cleanName,
+        email: cleanEmail,
         role: data.role,
         profilePic,
         last_login: new Date().toISOString(),
         created_at: new Date().toISOString(),
       };
-      console.log(userInfo);
-        await axiosIns.post("/users", userInfo);
+
+      await axiosIns.post("/users", userInfo);
       await updateUserProfile({
-        displayName: data.name,
+        displayName: cleanName,
         photoURL: profilePic,
       });
       navigate("/");

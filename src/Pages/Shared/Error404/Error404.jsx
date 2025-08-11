@@ -5,8 +5,9 @@ import notFoundAnimation from "../../../assets/Animation.json";
 
 const Error404 = () => {
   useEffect(() => {
-    document.title = "Daily Gigs | Error";
+    document.title = "ResQPet | Error";
   }, []);
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-base-100 text-base-content">
       <div className="max-w-md w-full text-center">

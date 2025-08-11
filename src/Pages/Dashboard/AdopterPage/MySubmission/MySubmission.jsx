@@ -80,26 +80,25 @@ const MyAdoptions = () => {
             No adoption requests yet.
           </p>
         )}
-
-        <div className="flex justify-center gap-4 my-6">
-          <button
-            disabled={page === 1}
-            onClick={() => setPage((prev) => prev - 1)}
-            className="btn btn-sm btn-outline"
-          >
-            Previous
-          </button>
-          <span className="text-lg font-semibold">
-            Page {page} of {totalPages}
-          </span>
-          <button
-            disabled={page === totalPages}
-            onClick={() => setPage((prev) => prev + 1)}
-            className="btn btn-sm btn-outline"
-          >
-            Next
-          </button>
-        </div>
+      </div>
+      <div className="flex justify-center gap-4 my-6">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+          className="btn btn-sm btn-outline"
+        >
+          Previous
+        </button>
+        <span className="text-lg font-semibold">
+          Page {page} of {totalPages}
+        </span>
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+          className="btn btn-sm btn-outline"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
