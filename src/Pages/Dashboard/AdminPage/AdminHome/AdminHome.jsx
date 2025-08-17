@@ -1,4 +1,3 @@
-// ==== Frontend: AdminHome.jsx ====
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -23,7 +22,6 @@ const AdminHome = () => {
   const {
     data: stats = {},
     isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
@@ -31,25 +29,6 @@ const AdminHome = () => {
       return res.data;
     },
   });
-
-  const handleApprove = async (id) => {
-    try {
-      await axiosSecure
-        .patch(`/dashboard/approve/${id}`)
-        .then((res) => {
-          Swal.fire("Success!", "Withdrawal approved.", "success");
-          refetch();
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response?.status) {
-            Swal.fire("Error!", `${err.response?.data?.error}`, "error");
-          }
-        });
-    } catch (err) {
-      Swal.fire("Error!", "Failed to approve withdrawal.", "error");
-    }
-  };
 
   if (isLoading) return <LoadingPage />;
 

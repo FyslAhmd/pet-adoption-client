@@ -24,8 +24,11 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const passwordValue = watch("password");
 
   const onSubmit = async (data) => {
     if (!profilePic) {
@@ -186,6 +189,24 @@ const Register = () => {
             />
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
+          </div>
+          <div>
+            <label className="font-medium">Confirm Password</label>
+            <input
+              className="border border-gray-400 p-2 w-full rounded-lg"
+              type="password"
+              placeholder="Confirm Password"
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === passwordValue || "Passwords do not match",
+              })}
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm">
+                {errors.confirmPassword.message}
+              </p>
             )}
           </div>
           <div>
