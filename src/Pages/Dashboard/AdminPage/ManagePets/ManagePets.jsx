@@ -119,7 +119,7 @@ const ManagePets = () => {
             ) : (
               <tr>
                 <td colSpan="7" className="text-center text-red-500 py-4">
-                  No tasks found.
+                  No pets found.
                 </td>
               </tr>
             )}
