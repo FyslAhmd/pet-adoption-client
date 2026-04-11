@@ -165,10 +165,17 @@ const AddNewPet = () => {
           <div>
             <label className="block font-medium mb-1">Age</label>
             <input
-              type="text"
-              {...register("age", { required: "Age is required" })}
+              type="number"
+              {...register("age", {
+                required: "Age is required",
+                valueAsNumber: true,
+                min: {
+                  value: 1,
+                  message: "Age must be greater than 0",
+                },
+              })}
               className="border border-gray-400 p-2 w-full rounded-lg"
-              placeholder="e.g. 2 years"
+              placeholder="2"
             />
             {errors.age && (
               <p className="text-red-500 text-sm">{errors.age.message}</p>
