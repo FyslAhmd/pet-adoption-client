@@ -5,7 +5,7 @@ import AuthLayout from "../Layout/AuthLayout";
 import Register from "../Pages/Auth/Register/Register";
 import Login from "../Pages/Auth/Login/Login";
 import About from "../Pages/About/About";
-import Dashboardlayout from "../Layout/Dashboardlayout";
+import DashboardLayout from "../Layout/DashboardLayout";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import AddNewPet from "../Pages/Dashboard/RescuerPages/AddNewPet/AddNewPet";
 import MyPets from "../Pages/Dashboard/RescuerPages/MyPets/MyPets";
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboardlayout />
+        <DashboardLayout />
       </PrivateRoute>
     ),
     children: [
